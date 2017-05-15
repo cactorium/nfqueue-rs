@@ -265,7 +265,7 @@ impl <T: Send> Queue<T> {
 
         loop {
             let rc = unsafe { libc::recv(fd,buf_ptr,buf_len,0) };
-            if rc < 0 { panic!("error in recv()"); };
+            if rc < 0 { println!("error in recv()"); };
 
             let rv = unsafe { nfq_handle_packet(self.qh, buf_ptr, rc as libc::c_int) };
             if rv < 0 { println!("error in nfq_handle_packet()"); }; // not critical
